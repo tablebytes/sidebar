@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoUri = 'mongodb://database/openTableSidebar';
+const mongoUri = 'mongodb://localhost/openTableSidebar';
 
 mongoose.connect(mongoUri, { useNewUrlParser: true });
 
