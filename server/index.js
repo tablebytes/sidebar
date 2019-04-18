@@ -58,7 +58,7 @@ app.get('/api/restaurants/:id/overview', (req, res) => {
 });
 
 app.put('/api/restaurants/:id/info/update', (req, res) => {
-  SidebarInfo.model.updateOne({ restaurantId: req.params.id}, req.body)
+  SidebarInfo.model.updateOne({ restaurantId: req.params.id }, req.body)
     .then(() => console.log('Sucessfully updated restaurant information.'))
     .catch(err => {
       console.log(err);
@@ -80,9 +80,17 @@ app.put('/api/restaurants/:id/overview/update', (req, res) => {
   });
 });
 
-// Delete
-  // Overview
-  // Sidebar
+app.delete('/api/restaurants/:id/info/delete', (req, res) => {
+  SidebarInfo.model.deleteOne({ restaurantId: req.params.id })
+    .then(() => console.log('Successfully deleted restaurant information.'))
+    .catch(error => console.log(error));
+});
+
+app.delete('/api/restaurants/:id/overview/delete', (req, res) => {
+  Overview.model.deleteOne({ restaurantId: req.params.id })
+    .then(() => console.log('Successfully deleted restaurant overview.'))
+    .catch(error => console.log(error));
+});
 
 const server = app.listen(port, () => {
   console.log(`Now listening on port ${port}`);
