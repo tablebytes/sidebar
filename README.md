@@ -18,7 +18,9 @@ specific address.
 
 ## Usage
 
-> TBD
+To compile the code, use command line ```npm run react``` to boot up webpack.
+To start up the server, ```npm run server-dev```.
+To seed the database, run ```npm run db:setup```.
 
 ## Requirements
 
@@ -38,3 +40,30 @@ npm install -g webpack
 npm install
 ```
 
+### CRUD API Operations
+
+POST
+- '/api/restaurants/info/new'
+  - Creates a new entry with information for the sidebar.
+- '/api/restaurants/overview/new'
+  - Creates a new entry with information for the sidebar.
+
+GET
+- '/api/restaurants/:id/info'
+  - Reads information for the sidebar entry with the corresponding restaurant id.
+- '/api/restaurants/:id/overview'
+  - Reads information for the overview entry with the corresponding restaurant id.
+
+PUT
+- '/api/restaurants/:id/info/update'
+  - Updates information for the sidebar entry with the corresponding restaurant id.
+- '/api/restaurants/:id/overview/update'
+  - Updates information for the overview entry with the corresponding restaurant id.
+    - Restaurant owner may use route to update name, cuisine, tags, and description.
+    - System can use route to update rating, review count, and cost range based off changing data.
+
+DELETE
+- '/api/restaurants/:id/info/delete'
+  - Deletes sidebar entry with the corresponding restaurant id.
+- '/api/restaurants/:id/overview/delete'
+  - Deletes overview entry with the corresponding restaurant id.
