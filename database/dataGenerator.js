@@ -1,4 +1,5 @@
 const faker = require('faker');
+const fs = require('fs');
 
 const sampleSidebarItems = [];
 const sampleOverviewItems = [];
@@ -65,5 +66,36 @@ const populateItems = () => {
 
 populateItems();
 
-exports.sampleSidebarItems = sampleSidebarItems;
-exports.sampleOverviewItems = sampleOverviewItems;
+let sidebarData = sampleSidebarItems.map((data) => {
+  return Object.values(data).map((data) => JSON.stringify(data)).join(',') + '\n';
+});
+
+let overviewData = sampleOverviewItems.map((data) => {
+  return Object.values(data).map((data) => JSON.stringify(data)).join(',') + '\n';
+});
+
+const sidebarWriter = fs.createWriteStream('sidebar.csv');
+
+const overviewWriter = fs.createWriteStream('overview.csv');
+
+const writeToFile = (data, writer) => {
+  let i = 0;
+  const total = 10
+  let notFull = true;
+  const write = () => {
+    while (i < total & notFull) {
+      notFull = writer.write(data[i]);
+      i += 1;
+    }
+    if (i < total - 1) {
+      writer.on('drain', write);
+    }
+  }
+  write();
+}
+
+writeToFile(sidebarData, sidebarWriter);
+writeToFile(overviewData, overviewWriter);
+
+// exports.sampleSidebarItems = sampleSidebarItems;
+// exports.sampleOverviewItems = sampleOverviewItems;
