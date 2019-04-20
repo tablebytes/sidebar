@@ -4,9 +4,11 @@ const fs = require('fs');
 const sampleSidebarItems = [];
 const sampleOverviewItems = [];
 
+const totalItems = 10000000;
+
 const populateItems = () => {
   const randRange = (min, max) => (Math.floor(Math.random() * (max + 1 - min)) + min);
-  for (let restaurantId = 1; restaurantId <= 10; restaurantId += 1) {
+  for (let restaurantId = 1; restaurantId <= totalItems; restaurantId += 1) {
     let newItem = {};
 
     newItem.restaurantId = restaurantId;
@@ -80,14 +82,13 @@ const overviewWriter = fs.createWriteStream('overview.csv');
 
 const writeToFile = (data, writer) => {
   let i = 0;
-  const total = 10
   let notFull = true;
   const write = () => {
-    while (i < total & notFull) {
+    while (i < totalItems & notFull) {
       notFull = writer.write(data[i]);
       i += 1;
     }
-    if (i < total - 1) {
+    if (i < totalItems) {
       writer.on('drain', write);
     }
   }
