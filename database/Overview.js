@@ -1,23 +1,44 @@
-const mongoose = require('mongoose');
-const db = require('./index.js');
+const sequelize = require('sequelize');
 
-mongoose.Promise = global.Promise;
+const overviewSchema = {
+  restaurantId: {
+    type: sequelize.INTEGER,
+    allowNull: false,
+  },
+  name: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  rating: {
+    type: sequelize.INTEGER,
+    allowNull: false,
+  },
+  reviewCount: {
+    type: sequelize.INTEGER,
+    allowNull: false,
+  },
+  costRange: {
+    type: sequelize.ARRAY(sequelize.INTEGER),
+    allowNull: false,
+  },
+  cuisine: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  tags: {
+    type: sequelize.ARRAY(sequelize.STRING),
+    allowNull: false,
+  },
+  description: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+};
 
-const overviewSchema = new mongoose.Schema({
-  restaurantId: Number,
-  name: String,
-  rating: Number,
-  reviewCount: Number,
-  costRange: Array,
-  cuisine: String,
-  tags: Array,
-  description: String,
-});
-
-const Overview = mongoose.model('Overview', overviewSchema);
+const Overview = sequelize.define('Overview', overviewSchema);
 
 const getOverview = restaurantId => {
-  return Overview.findOne({ restaurantId });
+  return Overview.findAll({ restaurantId });
 } 
 
 exports.model = Overview;

@@ -1,31 +1,76 @@
-const mongoose = require('mongoose');
-const db = require('./index.js');
+const sequelize = require('sequelize');
 
-mongoose.Promise = global.Promise;
+const sidebarInfoSchema = {
+  restaurantId: {
+    type: sequelize.INTEGER,
+    allowNull: false,
+  },
+  address: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  neighborhood: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  crossStreet: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  parking: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  dining: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  cuisines: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  hours: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  phone: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  website: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  payment: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  dress: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  additional: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  chef: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  catering: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+  privateFacilities: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+};
 
-const sidebarInfoSchema = new mongoose.Schema({
-  restaurantId: Number,
-  address: String,
-  neighborhood: String,
-  crossStreet: String,
-  parking: String,
-  dining: String,
-  cuisines: String,
-  hours: String,
-  phone: String,
-  website: String,
-  payment: String,
-  dress: String,
-  additional: String,
-  chef: String,
-  catering: String,
-  privateFacilities: String,
-});
-
-const SidebarInfo = mongoose.model('SidebarInfo', sidebarInfoSchema);
+const SidebarInfo = sequelize.define('SidebarInfo', sidebarInfoSchema);
 
 const getSidebarInfo = restaurantId => {
-  return SidebarInfo.findOne({ restaurantId });
+  return SidebarInfo.findAll({ restaurantId });
 } 
 
 exports.model = SidebarInfo;
