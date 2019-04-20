@@ -65,5 +65,5 @@ const populateItems = () => {
 
 populateItems();
 
-console.log(sampleSidebarItems);
-console.log(sampleOverviewItems);
+exports.sampleSidebarItems = sampleSidebarItems;
+exports.sampleOverviewItems = sampleOverviewItems;
