@@ -1,9 +1,5 @@
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
 
-const mongoUri = 'mongodb://localhost/openTableSidebar';
+const sequelize = new Sequelize('postgres://localhost/openTableSidebar');
 
-mongoose.connect(mongoUri, { useNewUrlParser: true });
-
-const db = mongoose.connection;
-
-module.exports = db;
+module.exports = sequelize;
