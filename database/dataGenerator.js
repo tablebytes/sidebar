@@ -30,9 +30,13 @@ const populateItems = (restaurantId) => {
 
     if (randRange(0, 2) === 2) {
       newItem.catering = faker.lorem.sentences();
+    } else {
+      newItem.catering = 'null';
     }
     if (randRange(0, 2) === 2) {
       newItem.privateFacilities = faker.lorem.sentences();
+    } else {
+      newItem.privateFacilities = 'null';
     }
 
     let newOverviewItem = {};
@@ -60,8 +64,16 @@ const populateItems = (restaurantId) => {
 }
 
 const stringifyItem = (data) => {
-  return Object.values(data).map((data) => JSON.stringify(data)).join(',') + '\n';
-}
+  return Object.values(data).map((data) => {
+    if (Array.isArray(data)) { 
+      return `"{${data}}"`;
+    } else if (typeof data === 'string') {
+      return `"${data}"`;
+    } else { 
+      return data; 
+    }
+  }).join(',') + '\n';
+};
 
 const sidebarWriter = fs.createWriteStream('sidebar.csv');
 
