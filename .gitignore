@@ -1,2 +1,7 @@
 node_modules
 bundle.js
+
+overview.csv
+overviewFields.csv
+sidebar.csv
+sidebarFields.csv
