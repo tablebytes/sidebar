@@ -1,4 +1,5 @@
 const sequelize = require('sequelize');
+const db = require('./index');
 
 const overviewSchema = {
   restaurantId: {
@@ -35,7 +36,7 @@ const overviewSchema = {
   },
 };
 
-const Overview = sequelize.define('Overview', overviewSchema);
+const Overview = db.sequelize.define('Overview', overviewSchema);
 
 const getOverview = restaurantId => {
   return Overview.findAll({ restaurantId });

@@ -1,4 +1,5 @@
 const sequelize = require('sequelize');
+const db = require('./index');
 
 const sidebarInfoSchema = {
   restaurantId: {
@@ -67,7 +68,7 @@ const sidebarInfoSchema = {
   },
 };
 
-const SidebarInfo = sequelize.define('SidebarInfo', sidebarInfoSchema);
+const SidebarInfo = db.sequelize.define('SidebarInfo', sidebarInfoSchema);
 
 const getSidebarInfo = restaurantId => {
   return SidebarInfo.findAll({ restaurantId });
