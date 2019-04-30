@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use('/restaurants/:id', express.static(path.join(__dirname, '/../client/dist')));
 
 app.post('/api/restaurants/info/new', (req, res) => {
-  SidebarInfo.model.find({ restaurantId: req.body.restaurantId })
+  SidebarInfo.model.findAll({ restaurantId: req.body.restaurantId })
   .then(info => {
     if (info.length > 0) {
       console.log('Restaurant id is taken.');
@@ -27,7 +27,7 @@ app.post('/api/restaurants/info/new', (req, res) => {
 });
 
 app.post('/api/restaurants/overview/new', (req, res) => {
-  Overview.model.find({ restaurantId: req.body.restaurantId })
+  Overview.model.findAll({ restaurantId: req.body.restaurantId })
   .then(info => {
     if (info.length > 0) {
       console.log('Restaurant id is taken.');
@@ -40,20 +40,24 @@ app.post('/api/restaurants/overview/new', (req, res) => {
 });
 
 app.get('/api/restaurants/:id/info', (req, res) => {
-  SidebarInfo.getSidebarInfo(req.params.id)
-    .then(info => {
+  SidebarInfo.model.findAll({
+    where: {
+      restaurantid: req.params.id,
+    }
+  })
+  .then(info => {
       res.send(info);
     });
 });
 
 app.get('/api/restaurants/:id/overview', (req, res) => {
-  Overview.getOverview(req.params.id)
+  Overview.model.findAll({ 
+    where: {
+      restaurantid: req.params.id,
+    } 
+  })
     .then(overview => {
-      SidebarInfo.getSidebarInfo(req.params.id)
-        .then(info => {
-          overview.cuisine = info.cuisines.split(',')[0];
-          res.send(overview);
-        })
+      res.send(overview);
     })
 });
 

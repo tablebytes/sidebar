@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 const db = require('./index');
 
 const sidebarInfoSchema = {
-  restaurantId: {
+  restaurantid: {
     type: sequelize.INTEGER,
     allowNull: false,
   },
@@ -14,7 +14,7 @@ const sidebarInfoSchema = {
     type: sequelize.STRING,
     allowNull: false,
   },
-  crossStreet: {
+  crossstreet: {
     type: sequelize.STRING,
     allowNull: false,
   },
@@ -50,10 +50,6 @@ const sidebarInfoSchema = {
     type: sequelize.STRING,
     allowNull: false,
   },
-  additional: {
-    type: sequelize.STRING,
-    allowNull: false,
-  },
   chef: {
     type: sequelize.STRING,
     allowNull: false,
@@ -62,16 +58,30 @@ const sidebarInfoSchema = {
     type: sequelize.STRING,
     allowNull: false,
   },
-  privateFacilities: {
+  privatefacilities: {
     type: sequelize.STRING,
     allowNull: false,
   },
 };
 
-const SidebarInfo = db.sequelize.define('SidebarInfo', sidebarInfoSchema);
+const SidebarInfo = db.sequelize.define('sidebarinfo', sidebarInfoSchema, {
+  freezeTableName: true,
+});
+SidebarInfo.removeAttribute('id');
+SidebarInfo.removeAttribute('createdAt');
+SidebarInfo.removeAttribute('updatedAt');
 
 const getSidebarInfo = restaurantId => {
-  return SidebarInfo.findAll({ restaurantId });
+  console.log("sidebar", SidebarInfo.findAll({
+    where: {
+      restaurantId: 10
+    }
+  }));
+  return SidebarInfo.findAll({ 
+    where: {
+      restaurantId: 10,
+    } 
+  });
 } 
 
 exports.model = SidebarInfo;

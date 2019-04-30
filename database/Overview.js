@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 const db = require('./index');
 
 const overviewSchema = {
-  restaurantId: {
+  restaurantid: {
     type: sequelize.INTEGER,
     allowNull: false,
   },
@@ -11,14 +11,14 @@ const overviewSchema = {
     allowNull: false,
   },
   rating: {
+    type: sequelize.NUMBER,
+    allowNull: false,
+  },
+  reviewcount: {
     type: sequelize.INTEGER,
     allowNull: false,
   },
-  reviewCount: {
-    type: sequelize.INTEGER,
-    allowNull: false,
-  },
-  costRange: {
+  costrange: {
     type: sequelize.ARRAY(sequelize.INTEGER),
     allowNull: false,
   },
@@ -36,10 +36,19 @@ const overviewSchema = {
   },
 };
 
-const Overview = db.sequelize.define('Overview', overviewSchema);
+const Overview = db.sequelize.define('overview', overviewSchema, {
+  freezeTableName: true,
+});
+Overview.removeAttribute('id');
+Overview.removeAttribute('createdAt');
+Overview.removeAttribute('updatedAt');
 
 const getOverview = restaurantId => {
-  return Overview.findAll({ restaurantId });
+  return Overview.findAll({ 
+    where: {
+      restaurantId: 10,
+    } 
+  });
 } 
 
 exports.model = Overview;
