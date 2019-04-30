@@ -40,21 +40,19 @@ app.post('/api/restaurants/overview/new', (req, res) => {
 });
 
 app.get('/api/restaurants/:id/info', (req, res) => {
-  SidebarInfo.getSidebarInfo(req.params.id)
-    .then(info => {
-      res.send(info);
-    });
+  SidebarInfo.model.find({ restaurantId: req.params.id })
+    .then((info) => {
+      res.send(info[0]);
+    })
+    .catch(err => console.log(err));
 });
 
 app.get('/api/restaurants/:id/overview', (req, res) => {
-  Overview.getOverview(req.params.id)
-    .then(overview => {
-      SidebarInfo.getSidebarInfo(req.params.id)
-        .then(info => {
-          overview.cuisine = info.cuisines.split(',')[0];
-          res.send(overview);
-        })
+  Overview.model.find({ restaurantId: req.params.id })
+    .then(overview => {  
+      res.send(overview[0]);
     })
+    .catch(err => console.log(err));
 });
 
 app.put('/api/restaurants/:id/info/update', (req, res) => {
