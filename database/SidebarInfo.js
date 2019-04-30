@@ -16,7 +16,6 @@ const sidebarInfoSchema = new mongoose.Schema({
   website: String,
   payment: String,
   dress: String,
-  additional: String,
   chef: String,
   catering: String,
   privateFacilities: String,
