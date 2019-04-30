@@ -21,7 +21,7 @@ const sidebarInfoSchema = new mongoose.Schema({
   privateFacilities: String,
 });
 
-const SidebarInfo = mongoose.model('SidebarInfo', sidebarInfoSchema);
+const SidebarInfo = mongoose.model('sidebarInfo', sidebarInfoSchema, 'sidebarInfo');
 
 const getSidebarInfo = restaurantId => {
   return SidebarInfo.findOne({ restaurantId });
