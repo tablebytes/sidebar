@@ -46,7 +46,8 @@ app.get('/api/restaurants/:id/info', (req, res) => {
     }
   })
   .then(info => {
-      res.send(info);
+      console.log(info);
+      res.send(info[0].dataValues);
     });
 });
 
@@ -57,7 +58,7 @@ app.get('/api/restaurants/:id/overview', (req, res) => {
     } 
   })
     .then(overview => {
-      res.send(overview);
+      res.send(overview[0].dataValues);
     })
 });
 
