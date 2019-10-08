@@ -16,13 +16,12 @@ const sidebarInfoSchema = new mongoose.Schema({
   website: String,
   payment: String,
   dress: String,
-  additional: String,
   chef: String,
   catering: String,
   privateFacilities: String,
 });
 
-const SidebarInfo = mongoose.model('SidebarInfo', sidebarInfoSchema);
+const SidebarInfo = mongoose.model('sidebarInfo', sidebarInfoSchema, 'sidebarInfo');
 
 const getSidebarInfo = restaurantId => {
   return SidebarInfo.findOne({ restaurantId });

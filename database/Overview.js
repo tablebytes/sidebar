@@ -14,7 +14,7 @@ const overviewSchema = new mongoose.Schema({
   description: String,
 });
 
-const Overview = mongoose.model('Overview', overviewSchema);
+const Overview = mongoose.model('Overview', overviewSchema, 'overview');
 
 const getOverview = restaurantId => {
   return Overview.findOne({ restaurantId });
